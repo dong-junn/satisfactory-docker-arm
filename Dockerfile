@@ -95,4 +95,5 @@ RUN FEXBash -c 'bash /home/satisfactory/steamcmd/steamcmd.sh \
   +quit'
 
 # satisfactory 서버 실행
+WORKDIR /home/satisfactory/server-file
 CMD ["FEXBash", "-c", "bash ./FactoryServer.sh"]
