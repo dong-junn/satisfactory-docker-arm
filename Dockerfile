@@ -28,7 +28,6 @@ RUN groupadd --gid "${HOST_GID}" satisfactory \
 USER satisfactory
 
 ENV HOME=/home/satisfactory
-ENV XDG_DATA_HOME=/home/satisfactory/.local/share
 
 # 수행 디렉토리 지정
 WORKDIR /home/satisfactory
