@@ -87,4 +87,11 @@ RUN mkdir -p /home/satisfactory/steamcmd \
 WORKDIR /home/satisfactory/steamcmd
 RUN FEXBash -c 'bash ./steamcmd.sh +quit'
 
+# satisfactory 서버파일 설치
+RUN FEXBash -c 'bash /home/satisfactory/steamcmd/steamcmd.sh \
+  +force_install_dir /home/satisfactory/server-file \
+  +login anonymous \
+  +app_update 1690800 validate \
+  +quit'
+
 
