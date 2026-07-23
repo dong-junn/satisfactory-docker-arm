@@ -1,0 +1,12 @@
+services:
+  satisfactory-server:
+    image: 'satisfactory-arm-server'
+    container_name: 'satisfactory-arm-server'
+    ports:
+      - '7777:7777/udp'
+      - '7777:7777/tcp'
+      - '8888:8888/tcp'
+    restart: 'unless-stopped'
+    volumes:
+      - './server-config:/home/satisfactory/.config/Epic'
+      - './server-file:/home/satisfactory/server-file'
