@@ -88,12 +88,11 @@ WORKDIR /home/satisfactory/steamcmd
 RUN FEXBash -c 'bash ./steamcmd.sh +quit'
 
 # satisfactory 서버파일 설치
-RUN FEXBash -c 'bash /home/satisfactory/steamcmd/steamcmd.sh \
+CMD ["FEXBash", "-c", "\
+bash /home/satisfactory/steamcmd/steamcmd.sh \
   +force_install_dir /home/satisfactory/server-file \
   +login anonymous \
   +app_update 1690800 validate \
-  +quit'
-
-# satisfactory 서버 실행
-WORKDIR /home/satisfactory/server-file
-CMD ["FEXBash", "-c", "bash ./FactoryServer.sh"]
+  +quit \
+&& cd /home/satisfactory/server-file \
+&& exec bash ./FactoryServer.sh"]
