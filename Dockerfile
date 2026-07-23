@@ -74,3 +74,17 @@ RUN set -eux; \
     \
     cat "$HOME/.fex-emu/Config.json"; \
     FEXBash -c 'test "$(uname -m)" = "x86_64"'
+
+# steamCMD 설치
+RUN mkdir -p /home/satisfactory/steamcmd \
+    && curl -fsSL \
+        https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz \
+        -o /tmp/steamcmd_linux.tar.gz \
+    && tar -xzf /tmp/steamcmd_linux.tar.gz \
+        -C /home/satisfactory/steamcmd \
+    && rm -f /tmp/steamcmd_linux.tar.gz
+
+WORKDIR /home/satisfactory/steamcmd
+RUN FEXBash -c 'bash ./steamcmd.sh +quit'
+
+
