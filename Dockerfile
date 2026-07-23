@@ -15,7 +15,16 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # 사용자 설정
-RUN useradd --create-home --shell /bin/bash satisfactory
+ARG HOST_UID=1000
+ARG HOST_GID=1000
+
+RUN groupadd --gid "${HOST_GID}" satisfactory \
+&& useradd --uid "${HOST_UID}" \
+          --gid "${HOST_GID}" \
+          --create-home \
+          --shell /bin/bash \
+          satisfactory
+
 USER satisfactory
 
 ENV HOME=/home/satisfactory
