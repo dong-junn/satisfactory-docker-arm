@@ -94,4 +94,5 @@ RUN FEXBash -c 'bash /home/satisfactory/steamcmd/steamcmd.sh \
   +app_update 1690800 validate \
   +quit'
 
-
+# satisfactory 서버 실행
+CMD ["FEXBash", "-c", "bash ./FactoryServer.sh"]
