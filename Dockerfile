@@ -15,9 +15,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # 이미지 빌드용 사용자 설정
-RUN groupadd --gid 1000 satisfactory \
-    && useradd --uid 1000 \
-          --gid 1000 \
+RUN groupadd --system satisfactory \
+    && useradd --system \
+          --gid satisfactory \
           --create-home \
           --shell /bin/bash \
           satisfactory
