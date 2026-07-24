@@ -1,8 +1,8 @@
 #!/bin/sh
 set -eu
 
-PUID="${PUID:-1000}"
-PGID="${PGID:-1000}"
+: "${PUID:?PUID is required}"
+: "${PGID:?PGID is required}"
 
 case "$PUID" in
     ''|*[!0-9]*|0)

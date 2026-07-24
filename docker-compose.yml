@@ -2,6 +2,9 @@ services:
   satisfactory-server:
     image: 'satisfactory-arm-server'
     container_name: 'satisfactory-arm-server'
+    environment:
+      PUID: '${PUID:?PUID is required}'
+      PGID: '${PGID:?PGID is required}'
     ports:
       - '7777:7777/udp'
       - '7777:7777/tcp'
