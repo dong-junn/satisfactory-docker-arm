@@ -14,13 +14,10 @@ RUN apt-get update \
         fex-emu-armv8.2 \
     && rm -rf /var/lib/apt/lists/*
 
-# 사용자 설정
-ARG HOST_UID=1000
-ARG HOST_GID=1000
-
-RUN groupadd --gid "${HOST_GID}" satisfactory \
-&& useradd --uid "${HOST_UID}" \
-          --gid "${HOST_GID}" \
+# 이미지 빌드용 사용자 설정
+RUN groupadd --gid 1000 satisfactory \
+    && useradd --uid 1000 \
+          --gid 1000 \
           --create-home \
           --shell /bin/bash \
           satisfactory
@@ -94,6 +91,11 @@ RUN mkdir -p /home/satisfactory/steamcmd \
 
 WORKDIR /home/satisfactory/steamcmd
 RUN FEXBash -c 'bash ./steamcmd.sh +quit'
+
+# 컨테이너 시작 시 호스트 UID/GID를 반영한 뒤 권한을 낮춰 실행
+USER root
+COPY --chmod=755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # satisfactory 서버파일 설치
 CMD ["FEXBash", "-c", "\
