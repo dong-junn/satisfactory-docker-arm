@@ -2,14 +2,12 @@ services:
   satisfactory-server:
     image: 'satisfactory-arm-server'
     container_name: 'satisfactory-arm-server'
-    environment:
-      PUID: '${PUID:?PUID is required}'
-      PGID: '${PGID:?PGID is required}'
     ports:
       - '7777:7777/udp'
       - '7777:7777/tcp'
       - '8888:8888/tcp'
     restart: 'unless-stopped'
     volumes:
+      - './docker-compose.yml:/run/host-owner:ro'
       - './server-config:/home/satisfactory/.config/Epic'
       - './server-file:/home/satisfactory/server-file'

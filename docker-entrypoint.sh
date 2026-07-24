@@ -1,8 +1,20 @@
 #!/bin/sh
 set -eu
 
-: "${PUID:?PUID is required}"
-: "${PGID:?PGID is required}"
+if [ -z "${PUID:-}" ] && [ -z "${PGID:-}" ]; then
+    HOST_OWNER_PATH="${HOST_OWNER_PATH:-/run/host-owner}"
+
+    if [ ! -e "$HOST_OWNER_PATH" ]; then
+        echo "Cannot detect host UID/GID: $HOST_OWNER_PATH is not mounted" >&2
+        exit 1
+    fi
+
+    PUID="$(stat -c '%u' "$HOST_OWNER_PATH")"
+    PGID="$(stat -c '%g' "$HOST_OWNER_PATH")"
+elif [ -z "${PUID:-}" ] || [ -z "${PGID:-}" ]; then
+    echo "PUID and PGID must be provided together" >&2
+    exit 1
+fi
 
 case "$PUID" in
     ''|*[!0-9]*|0)
@@ -38,6 +50,10 @@ fi
 mkdir -p \
     /home/satisfactory/.config/Epic \
     /home/satisfactory/server-file
+
+chown satisfactory:satisfactory \
+    /home/satisfactory \
+    /home/satisfactory/.config
 
 chown -R satisfactory:satisfactory \
     /home/satisfactory/.fex-emu \
