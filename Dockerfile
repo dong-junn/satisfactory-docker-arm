@@ -107,5 +107,3 @@ bash /home/satisfactory/steamcmd/steamcmd.sh \
   +quit \
 && cd /home/satisfactory/server-file \
 && exec bash ./FactoryServer.sh"]
-
-USER satisfactory
