@@ -1,6 +1,6 @@
 services:
   satisfactory-server:
-    image: 'satisfactory-arm-server'
+    image: 'geo0326/satisfactory-dedicated-arm:26-07-27'
     container_name: 'satisfactory-arm-server'
     ports:
       - '7777:7777/udp'
