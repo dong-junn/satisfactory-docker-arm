@@ -9,5 +9,5 @@ services:
     restart: 'unless-stopped'
     volumes:
       - './docker-compose.yml:/run/host-owner:ro'
-      - './server-config:/home/satisfactory/.config/Epic'
-      - './server-file:/home/satisfactory/server-file'
+      - './server_save_file:/home/satisfactory/.config/Epic'
+      - './server_file:/home/satisfactory/server-file'
