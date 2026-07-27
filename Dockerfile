@@ -1,6 +1,7 @@
 FROM ubuntu:24.04
 
 # fex-emu 설치
+ARG FEX_EMU_VERSION=8.3
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         software-properties-common \
@@ -11,7 +12,7 @@ RUN apt-get update \
     && add-apt-repository -y ppa:fex-emu/fex \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        fex-emu-armv8.2 \
+        fex-emu-armv${FEX_EMU_VERSION} \
     && rm -rf /var/lib/apt/lists/*
 
 # 이미지 빌드용 사용자 설정
